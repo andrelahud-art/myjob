@@ -114,7 +114,7 @@ export async function POST(
 
       // Release payment to worker (if payment exists and is in escrow)
       const escrowPayment = job.payments.find(
-        (p) => p.status === "ESCROW_HELD"
+        (p: typeof job.payments[number]) => p.status === "ESCROW_HELD"
       )
 
       if (escrowPayment && job.workerId) {
