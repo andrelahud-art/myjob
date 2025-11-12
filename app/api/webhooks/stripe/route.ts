@@ -161,7 +161,7 @@ async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
       entityId: payment.id,
       meta: {
         jobId: payment.jobId,
-        error: paymentIntent.last_payment_error,
+        error: paymentIntent.last_payment_error ? JSON.parse(JSON.stringify(paymentIntent.last_payment_error)) : null,
       },
     },
   })

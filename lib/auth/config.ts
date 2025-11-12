@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials"
 import Google from "next-auth/providers/google"
 import { compare } from "bcrypt"
 import { prisma } from "@/lib/db"
+import { UserRole } from "@prisma/client"
 
 export const authConfig: NextAuthConfig = {
   providers: [
@@ -52,7 +53,7 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id
+        token.id = user.id!
         token.role = user.role
       }
       return token
@@ -60,7 +61,7 @@ export const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string
-        session.user.role = token.role as string
+        session.user.role = token.role as UserRole
       }
       return session
     },
