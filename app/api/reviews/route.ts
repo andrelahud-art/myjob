@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
       select: { rating: true },
     })
 
-    const totalRating = userReviews.reduce((sum, r) => sum + r.rating, 0)
+    const totalRating = userReviews.reduce((sum: number, r: typeof userReviews[number]) => sum + r.rating, 0)
     const avgRating = totalRating / userReviews.length
 
     await prisma.profile.update({
