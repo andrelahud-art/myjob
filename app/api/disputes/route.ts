@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
     })
 
     await prisma.notification.createMany({
-      data: admins.map((admin) => ({
+      data: admins.map((admin: { id: string }) => ({
         userId: admin.id,
         type: "DISPUTE_OPENED_ADMIN",
         payload: {
