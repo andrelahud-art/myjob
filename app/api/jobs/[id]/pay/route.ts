@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { Payment } from "@prisma/client"
 import { prisma } from "@/lib/db"
 import { auth } from "@/lib/auth"
 import { createPaymentIntent, calculatePlatformFee } from "@/lib/stripe"
@@ -42,7 +43,7 @@ export async function POST(
 
     // Check if payment already exists
     const existingPayment = job.payments.find(
-      (p) => p.status === "ESCROW_HELD" || p.status === "REQUIRES_PAYMENT"
+      (p: Payment) => p.status === "ESCROW_HELD" || p.status === "REQUIRES_PAYMENT"
     )
 
     if (existingPayment) {
