@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
     // Check if already reviewed
     const existing = job.reviews.find(
-      (r) => r.fromUserId === session.user.id && r.toUserId === toUserId
+      (r: typeof job.reviews[number]) => r.fromUserId === session.user.id && r.toUserId === toUserId
     )
 
     if (existing) {

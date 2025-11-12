@@ -42,7 +42,7 @@ export async function POST(
 
     // Check if payment already exists
     const existingPayment = job.payments.find(
-      (p) => p.status === "ESCROW_HELD" || p.status === "REQUIRES_PAYMENT"
+      (p: typeof job.payments[number]) => p.status === "ESCROW_HELD" || p.status === "REQUIRES_PAYMENT"
     )
 
     if (existingPayment) {
