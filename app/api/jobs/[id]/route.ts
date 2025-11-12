@@ -142,7 +142,7 @@ export async function PATCH(
     console.error("Update job error:", error)
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Invalid input", details: error.errors },
+        { error: "Invalid input", details: error.issues },
         { status: 400 }
       )
     }
